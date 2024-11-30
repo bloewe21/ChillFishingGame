@@ -1,0 +1,4 @@
+repository "ChillFishing/BingFishing@1374855197842@cloud"
+  path "/"
+    br "/main"
+    co "/main"
