@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
             isDashing = false;
         }
         //if player moves against dash direction
-        if (isDashing && ((!facingRight && rb.linearVelocityX > 0) || (facingRight && rb.linearVelocityX < 0)))
+        if (isDashing && ((xDirection == -1 && rb.linearVelocityX > 0) || (xDirection == 1 && rb.linearVelocityX < 0)))
         {
             isDashing = false;
         }
