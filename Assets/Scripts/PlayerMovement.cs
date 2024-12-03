@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     //private bool playerGrounded = false;
     private float xDirection;
     private float currentXSpeed = 0f;
-    public bool isDashing = false;
+    private bool isDashing = false;
     public bool facingRight = true;
 
     [Header("References")]
@@ -53,6 +53,22 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         HorizontalMovement();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            rb.gravityScale /= 4.0f;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            rb.gravityScale *= 4.0f;
+        }
     }
 
     private void HorizontalMovement()
