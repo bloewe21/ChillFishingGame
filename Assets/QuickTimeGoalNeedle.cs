@@ -1,50 +1,45 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class QuickTimeGoalNeedle : MonoBehaviour
 {
+
+    bool inStuff;
+
     [SerializeField]
-    private GameObject Needle;
-
-    Collider2D col;
-    Collider2D NeedlCol;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        //InvokeRepeating("SetRandRot", 1f, 1f);
-        col = GetComponent<Collider2D>(); 
-        NeedlCol = Needle.GetComponent<Collider2D>();
-    }
+    private QuickTimeNeedleController controller;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && inStuff)
         {
-            if (col.IsTouching(NeedlCol))
-            {
-                print("2");
-                SetRandRot();
-            }
-
-
+            controller.SwapDirection();
+            controller.IncreaseSpeed();
+            SetRandRot();
         }
 
     }
 
-    private void CheckCol()
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Target"))
+        {
+            inStuff = true;
+        }
     }
 
-    private void FixedUpdate()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        
+        if (other.CompareTag("Target"))
+        {
+            inStuff = false;
+        }
     }
 
     private void SetRandRot()
     {
         transform.RotateAround(new Vector3(0, 0, 0), Vector3.forward, Random.Range(-90f, 90f) );
-
     }
 }
