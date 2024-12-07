@@ -7,6 +7,9 @@ TagManager:
   - Ground
   - Water
   - Target
+  - Door
+  - NPC
+  - Bob
   layers:
   - Default
   - TransparentFX

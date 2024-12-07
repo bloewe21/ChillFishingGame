@@ -26,8 +26,17 @@ public class RodMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        slider.transform.position = new Vector2(transform.position.x, transform.position.y + 1.0f);
+
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Bob"));
+        }
+
+        //holding down leftclick
         if (Input.GetButton("Fire1"))
         {
+            slider.SetActive(true);
             sliderActive = true;
             if (slider.GetComponent<Slider>().value >= slider.GetComponent<Slider>().maxValue)
             {
@@ -46,6 +55,10 @@ public class RodMovement : MonoBehaviour
             {
                 slider.GetComponent<Slider>().value -= Time.deltaTime;
             }
+        }
+        else
+        {
+            slider.SetActive(false);
         }
 
         sliderValue = slider.GetComponent<Slider>().value;
